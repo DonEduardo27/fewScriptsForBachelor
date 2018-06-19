@@ -1,0 +1,1 @@
+Beim versuch, ein .mis file einzulesen, trifft man beim aktuellen Programm auf das Problem, dass jeder Vertex (referenziert durch seinen Index) nur einmal existieren darf. fur jede Zeile den python internen abfrage "not in" abzufragen, macht das programm extrem ineffizient(1 minute 48) ohne die Abfrage ist man in unter 2 sekunden fertig.
