@@ -9,7 +9,7 @@ def main():
 	mat = 0#[[1,0,1,1,0,1],[1,0,1,0,0,0],[0,1,1,1,1,0],[1,0,0,0,0,1],[1,0,1,1,0,0],[0,0,1,0,1,1]]
 #
  	g = graph(mat, "G")
-	g.read("../Graphen/data_mis_0000.mis")
+	g.read("../Graphen/test.mis")#data_mis_0000.mis")
 #	#g.printmat()
 	#g.printlist()
 
@@ -66,7 +66,7 @@ class vertex:
 	def printNeighbours(self):
 		prntstr = ""
 		for i in self.neighbours:
-			prntstr += str(i.index) + "  "
+			prntstr += str(i.name) + "  "
 		return prntstr
 
 class graph:

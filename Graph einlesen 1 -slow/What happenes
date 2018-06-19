@@ -1,0 +1,1 @@
+Die Vertices zu ordnen dauert 2 minuten auf dem ersten mis file. am ende sind 2998 vertices strukturiert eingelesen. die zahl im .mis file wird programmintern als .name repräsentiert und auf einen kontinuierlichen, geordneten index gemappt. dies erleichtert den zugriff in initializeedges.
