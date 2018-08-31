@@ -5,52 +5,22 @@ import gc
 from treedec import *
 
 def main():
-	#Test ob Adjazenzliste aus Adjazenzmatrix ordnungsgemaess erstellt wird 
+	mat = 0	# obligatorisch zu testzwecken. 
+			#geeigneter zum erstellen von graphen ist das mis file.	
+#[[1,0,1,1,0,1],[1,0,1,0,0,0],[0,1,1,1,1,0],[1,0,0,0,0,1],[1,0,1,1,0,0],[0,0,1,0,1,1]]
 
-	mat = 0#[[1,0,1,1,0,1],[1,0,1,0,0,0],[0,1,1,1,1,0],[1,0,0,0,0,1],[1,0,1,1,0,0],[0,0,1,0,1,1]]
-#
+	#Graph einlesen und erstellen. Zeit messen.
  	g = graph(mat, "G")
-	#g.read("../Graphen/test.mis")#data_mis_0000.mis")
 	t = clock()
 	g.read("./data_mis_0001.mis")#../Graphen/data_mis_0000.mis")
 	print("Gesamt: " + str(clock()-t) + " Sekunden")
 
+	#erstellen eines Baumzerlegung - Objekts
 	T = TreeDec("TW(G)")
 
+	#Tests für k = 1 ... 5
 	for i in range(1,6):
 		T.decompose(g,i)
-	#g.printlist()
-
-#Zeitmessung
-	#erster Parameter: wie oft wird gemessen, 
-	#zweiter Parameter: In wie grossen abstaenden wird gemessen
-	#timeTest(80,100)
-
-def timeTest(runs, stepsize):
-	#im Array times werden die zeiten in sekunden gespeichert
-	#fuer jede Runde wird die Zeit von InitRandomly gemessen, welche je nach runde groesser
-	#werdende graphen als liste initialisiert
-	times = []
-	for i in range(1,runs+1):
-		a = i * stepsize
-		g2 = graph(0, "G" + str(a))
-		t1 = clock()
-		g2.initRandomly(a)
-		times.append(clock() - t1)
-
-		#wird naturlich nicht mitgemessen
-		g2.printlist()
-		del g2
-		gc.collect()
-		try: 
-			print(str(g2.name) + " existiert noch")
-			return 0
-		except:
-			print "Objekt geloescht"
-
-		#diese Scheife dient zum ausgeben der Messwerte
-	for i in range(0,runs):
-		print ("Durchlauf " + str(i+1) + " dauerte "+str(times[i]) + " Sekunden (" + str(stepsize*(i+1)) + " Vertices erstellt)")
 
 class vertex:
 	#Jeder Vertex hat einige Nachbarn (somit eine Edge pro Nachbar)
@@ -100,7 +70,8 @@ class graph:
 				print("Adjazenzmatrizen mussen quadratisch sein.")
 
 	def read(self, filepath):
-
+		#einlesen und initialisieren
+		#aus der Struktur im mis file wird intern eine Art zeigerstruktur
 		vertices = 0
 		edges    = 0
 
@@ -182,6 +153,7 @@ class graph:
 				if self.adjmat[row][column] == 1:
 					self.vertices[row].setNeighbour(self.vertices[column])
 	def initRandomly(self,size):
+		#####ZU TESTZWECKEN#####
 		#initialisiert einen beliebig grossen graphen mit IVI^(1,5) vielen Kanten zufaellig
 
 		#vertices erstellen
