@@ -30,6 +30,7 @@ class vertex:
 		self.neighbours = []
 		self.index = 0
 		self.degree = 0
+		self.isHighDegree = False
 		self.name = ""
 
 		self.index = i

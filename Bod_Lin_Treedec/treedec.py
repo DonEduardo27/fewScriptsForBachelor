@@ -25,16 +25,15 @@ class TreeDec:
 				pass
 
 	def decompose(self, G, k):
-		V = G.totalVertices
-		E = G.totalEdges
 
-		self.calculateInitialalues(k)
+		self.calculateInitialValues(k)
+		self.recursiveStep(G, k)
 
 		#if E >= k * V - k * ( k+1 ) / 2:
 			#self.devideVertexSets(k)
 		#else:
 			#print("Treewidth of " + self.name + " is bigger than " + str(k))
-	def calculateInitialalues(self,k):
+	def calculateInitialValues(self,k):
 		self.c1 = 0.0
 		self.c2 = -1.0
 		self.d  = 0
@@ -50,6 +49,24 @@ class TreeDec:
 		
 		print("Initial Values for k = " + str(k) +"are: ")
 		print("c1 = " + str(self.c1) + ", c2 = " + str(self.c2)+ ", d = " + str(self.d))
+
+	def recursiveStep(self, G, k):
+		V = G.totalVertices
+		E = G.totalEdges
+
+		if E >= k * V - k * ( k+1 ) / 2:
+			print("Counting high degree vertices...")
+			count = 0
+			for v in G.vertices:
+				if v.degree >= self.d:
+					v.isHighDegree  = True
+					count += 1
+			print("There are " + str(count)+".")
+			print("-.-.-.-.-.-.-.-..-.-..--..-.-")
+			print("Counting friendly vertices...")
+
+		else:
+			print("Treewidth of " + self.name + " is bigger than " + str(k))
 #	def devideVertexSets(self,k):
 #		d = (k + 2) ** 2 
 #		l = 1
