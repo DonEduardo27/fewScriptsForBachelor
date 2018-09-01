@@ -20,7 +20,7 @@ def main():
 
 	#Tests fuer k = 1 ... 5
 	for i in range(1,6):
-		T.decompose(g,i)
+		T.decompose(g ,i)
 
 class vertex:
 	#Jeder Vertex hat einige Nachbarn (somit eine Edge pro Nachbar)

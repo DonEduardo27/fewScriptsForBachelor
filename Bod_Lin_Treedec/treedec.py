@@ -25,7 +25,7 @@ class TreeDec:
 				pass
 
 	def decompose(self, G, k):
-
+		print ("\n")
 		self.calculateInitialValues(k)
 		self.recursiveStep(G, k)
 
@@ -44,32 +44,35 @@ class TreeDec:
 			self.c1 = self.c1 / 2.0
 			self.c2 = (1.0 / float(4*k**2 + 12*k + 16)) - float(self.c1 * k**2*(k+1)) / 2.0
 
-			print(str(self.c2))
 		self.d = math.ceil((2*k) / self.c1)
 		
-		print("Initial Values for k = " + str(k) +"are: ")
+		print("Initial Values for k = " + str(k) +" are: ")
 		print("c1 = " + str(self.c1) + ", c2 = " + str(self.c2)+ ", d = " + str(self.d))
 
 	def recursiveStep(self, G, k):
 		V = G.totalVertices
 		E = G.totalEdges
 
+		for v in G.vertices:
+			v.isHighDegree = False
+
 		if E >= k * V - k * ( k+1 ) / 2:
 			print("Counting high degree vertices...")
 			countHD = 0
 			for v in G.vertices:
 				if v.degree >= self.d:
-					v.isHighDegree  = True
+					v.isHighDegree = True
 					countHD += 1
 			print("There are " + str(countHD)+".")
-			print("-.-.-.-.-.-.-.-..-.-..--..-.-")
+			print(" ")
 			print("Counting friendly vertices...")
 			countFV = 0
 			for v in G.vertices:
-				for nb in v.neighbours:
-					if nb.isHighDegree == False:
-						countFV += 1
-						break
+				if v.isHighDegree == False:
+					for nb in v.neighbours:
+						if nb.isHighDegree == False:
+							countFV += 1
+							break
 			print("There are " + str(countFV)+".")
 
 
