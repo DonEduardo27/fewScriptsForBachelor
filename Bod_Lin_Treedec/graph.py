@@ -12,13 +12,13 @@ def main():
 	#Graph einlesen und erstellen. Zeit messen.
  	g = graph(mat, "G")
 	t = clock()
-	g.read("./data_mis_0001.mis")#../Graphen/data_mis_0000.mis")
+	g.read("../data_mis_0001.mis")#../Graphen/data_mis_0000.mis")
 	print("Gesamt: " + str(clock()-t) + " Sekunden")
 
 	#erstellen eines Baumzerlegung - Objekts
 	T = TreeDec("TW(G)")
 
-	#Tests für k = 1 ... 5
+	#Tests fuer k = 1 ... 5
 	for i in range(1,6):
 		T.decompose(g,i)
 
