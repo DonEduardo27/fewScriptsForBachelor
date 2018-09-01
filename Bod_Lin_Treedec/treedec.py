@@ -56,14 +56,22 @@ class TreeDec:
 
 		if E >= k * V - k * ( k+1 ) / 2:
 			print("Counting high degree vertices...")
-			count = 0
+			countHD = 0
 			for v in G.vertices:
 				if v.degree >= self.d:
 					v.isHighDegree  = True
-					count += 1
-			print("There are " + str(count)+".")
+					countHD += 1
+			print("There are " + str(countHD)+".")
 			print("-.-.-.-.-.-.-.-..-.-..--..-.-")
 			print("Counting friendly vertices...")
+			countFV = 0
+			for v in G.vertices:
+				for nb in v.neighbours:
+					if nb.isHighDegree == False:
+						countFV += 1
+						break
+			print("There are " + str(countFV)+".")
+
 
 		else:
 			print("Treewidth of " + self.name + " is bigger than " + str(k))
